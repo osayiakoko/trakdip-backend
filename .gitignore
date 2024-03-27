@@ -48,6 +48,7 @@ local.py
 # IDEs
 .DS_Store
 .idea
+.vscode
 
 # Installer logs
 pip-delete-this-directory.txt
