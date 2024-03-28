@@ -638,6 +638,17 @@ files = [
 ]
 
 [[package]]
+name = "ua-parser"
+version = "0.18.0"
+description = "Python port of Browserscope's user agent parser"
+optional = false
+python-versions = "*"
+files = [
+    {file = "ua-parser-0.18.0.tar.gz", hash = "sha256:db51f1b59bfaa82ed9e2a1d99a54d3e4153dddf99ac1435d51828165422e624e"},
+    {file = "ua_parser-0.18.0-py2.py3-none-any.whl", hash = "sha256:9d94ac3a80bcb0166823956a779186c746b50ea4c9fd9bf30fdb758553c38950"},
+]
+
+[[package]]
 name = "uritemplate"
 version = "4.1.1"
 description = "Implementation of RFC 6570 URI Templates"
@@ -648,7 +659,21 @@ files = [
     {file = "uritemplate-4.1.1.tar.gz", hash = "sha256:4346edfc5c3b79f694bccd6d6099a322bbeb628dbf2cd86eea55a456ce5124f0"},
 ]
 
+[[package]]
+name = "user-agents"
+version = "2.2.0"
+description = "A library to identify devices (phones, tablets) and their capabilities by parsing browser user agent strings."
+optional = false
+python-versions = "*"
+files = [
+    {file = "user-agents-2.2.0.tar.gz", hash = "sha256:d36d25178db65308d1458c5fa4ab39c9b2619377010130329f3955e7626ead26"},
+    {file = "user_agents-2.2.0-py3-none-any.whl", hash = "sha256:a98c4dc72ecbc64812c4534108806fb0a0b3a11ec3fd1eafe807cee5b0a942e7"},
+]
+
+[package.dependencies]
+ua-parser = ">=0.10.0"
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "c8ed1f8c70c03fd8b305bcac4357eaaef94fac49ad377fa7a0759533a0bb50e5"
+content-hash = "33cb0cecbe66df4f3e72b19ab1f089753ffeef159dd8c38a226623ae67cf1d68"
