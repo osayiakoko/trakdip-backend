@@ -59,6 +59,7 @@ jobs:
           FILTER_REGEX_EXCLUDE: .*/migrations/.*
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: "dev"
+          GITHUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
           VALIDATE_MARKDOWN: true
           VALIDATE_PYTHON_PYLINT: true
           VALIDATE_PYTHON_FLAKE8: true
