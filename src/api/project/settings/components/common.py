@@ -82,8 +82,12 @@ WSGI_APPLICATION = "project.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",  # noqa: F821 # type: ignore
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("POSTGRES_DB"),  # noqa: F821 # type: ignore
+        "USER": env("POSTGRES_USER"),  # noqa: F821 # type: ignore
+        "PASSWORD": env("POSTGRES_PASSWORD"),  # noqa: F821 # type: ignore
+        "HOST": env("POSTGRES_HOST"),  # noqa: F821 # type: ignore
+        "PORT": env("POSTGRES_PORT"),  # noqa: F821 # type: ignore
     }
 }
 
