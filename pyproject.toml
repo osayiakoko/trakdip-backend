@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "trakdip-backend"
 version = "1.0.0"
-description = "TrakDip is an expense tracker that helps user log their expenses and also features insights for users to make informed decisions on their expenditures."
+description = "Trakdip is an expense tracker that helps user log their expenses and also features insights for users to make informed decisions on their expenditures."
 authors = ["Osayi Akoko <osayistreams@gmail.com>"]
 license = "MIT"
 readme = "README.md"
