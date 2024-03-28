@@ -16,6 +16,7 @@ include(
     "components/common.py",  # standard django settings
     "components/logging.py",
     "components/rest_framework.py",
+    "components/custom.py",
     f'environments/{env("DJANGO_ENV")}.py',
     optional("environments/local.py"),
 )
