@@ -12,6 +12,8 @@ env:
   POSTGRES_HOST: localhost
   POSTGRES_PORT: 5432
   DJANGO_SECRET_KEY: secret_key_:)
+  DJANGO_SUPERUSER_EMAIL: superuser@gmail.com
+  DJANGO_SUPERUSER_PASSWORD: superPassword
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.head_ref }}"
