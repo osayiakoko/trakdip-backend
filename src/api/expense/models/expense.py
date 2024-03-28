@@ -15,7 +15,7 @@ class Expense(models.Model):
     )
     amount = models.DecimalField(max_digits=15, decimal_places=2)
     description = models.CharField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField()
 
     class meta:
         db_table = "expense"
