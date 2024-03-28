@@ -6,7 +6,7 @@ from core.tests.constant import (
 )
 
 
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def user(db):
     user = baker.make("account.User", email=TEST_USER_EMAIL)
     user.set_password(TEST_USER_PASSWORD)
