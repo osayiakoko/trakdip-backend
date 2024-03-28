@@ -69,4 +69,4 @@ jobs:
           VALIDATE_YAML: true
 
       - name: Run Tests
-        run: make test
+        run: 	poetry run pytest -n auto 
