@@ -35,7 +35,6 @@ media
 
 # Environments
 .venv
-/.env
 /local
 ENV/
 env.bak/
@@ -44,6 +43,7 @@ venv
 venv.bak/
 venv/
 local.py
+**/.env
 
 # IDEs
 .DS_Store
