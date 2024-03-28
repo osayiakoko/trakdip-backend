@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "doc.apps.DocConfig",
     "account.apps.AccountConfig",
     "authentication.apps.AuthenticationConfig",
+    "expense.apps.ExpenseConfig",
 ]
 
 MIDDLEWARE = [
