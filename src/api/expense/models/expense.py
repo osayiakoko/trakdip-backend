@@ -21,4 +21,4 @@ class Expense(models.Model):
         db_table = "expense"
 
     def __str__(self):
-        return self.amount
+        return str(self.amount)
