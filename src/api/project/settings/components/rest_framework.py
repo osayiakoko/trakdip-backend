@@ -26,3 +26,13 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
 }
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "TrakDip Project API",
+    "DESCRIPTION": "TrakDip is an expense tracker that helps user log their expenses and also features insights \
+          for users to make informed decisions on their expenditures.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SCHEMA_PATH_PREFIX": r"/v[0-9]",
+}
