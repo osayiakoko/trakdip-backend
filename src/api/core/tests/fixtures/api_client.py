@@ -17,14 +17,13 @@ def _get_access_token(api_client, user):
 
 
 @pytest.fixture
-def api_client(api_key) -> APIClient:
+def api_client() -> APIClient:
     api_client = APIClient()
-    api_client.credentials(HTTP_API_KEY=api_key)
     return api_client
 
 
 @pytest.fixture
-def api_client_jwt(api_client, api_key, user) -> APIClient:
+def api_client_jwt(api_client, user) -> APIClient:
     token = _get_access_token(api_client, user)
-    api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {token}", HTTP_API_KEY=api_key)
+    api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {token}")
     return api_client
