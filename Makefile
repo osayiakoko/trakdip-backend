@@ -32,3 +32,7 @@ shell:
 .PHONY: provisionsuperuser
 provisionsuperuser:
 	poetry run python ./src/api/manage.py provisionsuperuser
+
+.PHONY: test
+test:
+	poetry run pytest -v -rs -rP -n auto --show-capture=stdout
