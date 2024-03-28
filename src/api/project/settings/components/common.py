@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_spectacular",
     # Apps
+    "core.apps.CoreConfig",
     "doc.apps.DocConfig",
     "account.apps.AccountConfig",
     "authentication.apps.AuthenticationConfig",
