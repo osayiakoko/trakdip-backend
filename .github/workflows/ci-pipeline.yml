@@ -37,35 +37,33 @@ jobs:
           POSTGRES_PASSWORD: trakdip
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Install Poetry
-      uses: abatilo/actions-poetry@v2.0.0
-      with:
-        poetry-version: 1.7.1
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: 1.7.1
 
-    - name: Install Dependencies
-      run: make install
+      - name: Install Dependencies
+        run: make install
 
-    - name: Lint Code Base
-      uses: github/super-linter@v4
-      env:
-        FILTER_REGEX_EXCLUDE: .*/migrations/.*
-        VALIDATE_ALL_CODEBASE: false
-        DEFAULT_BRANCH: "dev"
-        GITHUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}  
-        VALIDATE_MARKDOWN: true
-        VALIDATE_PYTHON_PYLINT: true
-        VALIDATE_PYTHON_FLAKE8: true
-        VALIDATE_TERRAFORM_TFLINT: true
-        VALIDATE_YAML: true
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          FILTER_REGEX_EXCLUDE: .*/migrations/.*
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: "dev"
+          VALIDATE_MARKDOWN: true
+          VALIDATE_PYTHON_PYLINT: true
+          VALIDATE_PYTHON_FLAKE8: true
+          VALIDATE_TERRAFORM_TFLINT: true
+          VALIDATE_YAML: true
 
-    - name: Run Tests
-      run: |
-        make test
+      - name: Run Tests
+        run: make test
