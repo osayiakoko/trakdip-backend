@@ -23,7 +23,7 @@ RUN poetry install --no-root
 
 # Copy project files
 COPY ["Makefile", "./"]
-COPY src src
+COPY src/api src/api
 
 # Expose the Django development server port (adjust if needed)
 EXPOSE 8000 8000
