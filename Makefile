@@ -19,7 +19,8 @@ superuser:
 	poetry run python ./src/api/manage.py createsuperuser
 
 .PHONY: collectstatic
-collectstatic: poetry run python ./src/api/manage.py collectstatic
+collectstatic: 
+	poetry run python ./src/api/manage.py collectstatic
 
 .PHONY: run
 run: 
