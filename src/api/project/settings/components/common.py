@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_spectacular",
     "django_filters",
+    "storages",
+    "django_prometheus",
     # Apps
     "core.apps.CoreConfig",
     "doc.apps.DocConfig",
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -63,6 +66,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_prometheus.middleware.PrometheusAfterMiddleware",
 ]
 
 ROOT_URLCONF = "project.urls"
@@ -91,7 +95,8 @@ WSGI_APPLICATION = "project.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django_prometheus.db.backends.postgresql",
+        # "ENGINE": "django.db.backends.postgresql",
         "NAME": env("POSTGRES_DB"),  # noqa: F821 # type: ignore
         "USER": env("POSTGRES_USER"),  # noqa: F821 # type: ignore
         "PASSWORD": env("POSTGRES_PASSWORD"),  # noqa: F821 # type: ignore

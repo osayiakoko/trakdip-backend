@@ -14,6 +14,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 include(
     "components/common.py",  # standard django settings
+    "components/storage.py",
     "components/logging.py",
     "components/rest_framework.py",
     "components/custom.py",

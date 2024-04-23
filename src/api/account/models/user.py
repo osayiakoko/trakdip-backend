@@ -6,8 +6,10 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework_simplejwt.tokens import RefreshToken
 from account.managers.user_manager import UserManager
 
+from django_prometheus.models import ExportModelOperationsMixin
 
-class User(AbstractBaseUser, PermissionsMixin):
+
+class User(ExportModelOperationsMixin("user"), AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_("first name"), max_length=150, blank=True)
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
     email = models.EmailField(_("email address"), unique=True)
