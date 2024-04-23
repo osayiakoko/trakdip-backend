@@ -1,5 +1,7 @@
 version: '3'
 
+name: trakdip-backend-infra
+
 services:
   web:
     build: .

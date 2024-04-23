@@ -1,5 +1,7 @@
 version: '3'
 
+name: trakdip-backend-infra-dev
+
 services:
   db:
     image: postgres:14.2-alpine
