@@ -190,6 +190,8 @@ resource "aws_lb" "api_lb" {
   load_balancer_type = "application"
   subnets            = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
   security_groups    = [aws_security_group.api_sg.id]
+
+  enable_deletion_protection = false
 }
 
 // Create a target group for the load balancer
@@ -219,6 +221,51 @@ resource "aws_lb_listener" "api_listener" {
   }
 }
 
+// Create a CloudFront distribution
+resource "aws_cloudfront_distribution" "api_cloudfront" {
+  origin {
+    domain_name = aws_lb.api_lb.dns_name
+    # origin_id = aws_lb.api_lb.dns_name
+    origin_id = "${aws_lb.api_lb.name}-origin"
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
+
+  enabled             = true
+  default_root_object = ""
+
+  default_cache_behavior {
+    # target_origin_id =  aws_lb.api_lb.dns_name
+    target_origin_id = "${aws_lb.api_lb.name}-origin"
+    allowed_methods  = ["GET", "HEAD", "OPTIONS", "PUT", "PATCH", "POST", "DELETE"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
+    # Using the CachingDisabled managed policy ID:
+    cache_policy_id = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+    # Using the AllViewer managed policy ID:
+    origin_request_policy_id = "216adef6-5c7f-47e4-b989-5492eafa07d3"
+    viewer_protocol_policy   = "redirect-to-https"
+    compress                 = true
+  }
+
+  price_class = "PriceClass_100"
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+      locations        = []
+    }
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+}
+
+
 // Output the ECS task definition ARN and load balancer DNS name
 output "task_definition_arn" {
   value = aws_ecs_task_definition.api_task.arn
@@ -226,4 +273,8 @@ output "task_definition_arn" {
 
 output "load_balancer_dns" {
   value = aws_lb.api_lb.dns_name
+}
+
+output "cloudfront_domain_name" {
+  value = aws_cloudfront_distribution.api_cloudfront.domain_name
 }
