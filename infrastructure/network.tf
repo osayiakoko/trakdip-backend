@@ -133,8 +133,8 @@ resource "aws_ecs_task_definition" "api_task" {
 
   container_definitions = jsonencode([
     {
-      name        = "nginx",
-      image       = "nginx",
+      name        = "${var.project_name}",
+      image       = "654654333412.dkr.ecr.us-east-1.amazonaws.com/trakdip:latest",
       cpu         = 512
       memory      = 1024
       essential   = true
@@ -176,7 +176,7 @@ resource "aws_ecs_service" "api_service" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.api_target_group.arn
-    container_name   = "nginx"
+    container_name   = var.project_name
     container_port   = 80
   }
 
