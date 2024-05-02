@@ -12,6 +12,8 @@ on:
 jobs:
   provision-s3-and-dynamodb:
     runs-on: ubuntu-latest
+    outputs:
+      table_exists: ${{ steps.check-dynamodb-table.outputs.table_exists }}
     env:
       environment: ${{github.event.inputs.environment}}
       region: us-east-1
@@ -42,10 +44,11 @@ jobs:
         id: check-dynamodb-table
         run: |
           aws dynamodb describe-table --table-name trakdip_terraform_locks \
-            && echo "TableExists=true" || echo "TableExists=false"
+            && echo "table_exists=true" >> $GITHUB_OUTPUT || \
+              echo "table_exists=false" >> $GITHUB_OUTPUT
 
       - name: Create DynamoDB Table for Terraform State Locking
-        if: steps.check-dynamodb-table.outputs.TableExists == false
+        if: ${{ steps.check-dynamodb-table.outputs.table_exists == 'false' }}
         run: |
           aws dynamodb create-table \
             --table-name trakdip_terraform_locks \
