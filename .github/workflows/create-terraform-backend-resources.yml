@@ -41,15 +41,11 @@ jobs:
       - name: Check if DynamoDB Table Exists
         id: check-dynamodb-table
         run: |
-          set -e
-          if aws dynamodb describe-table --table-name trakdip_terraform_locks; then
-            echo "TableExists=true"
-          else
-            echo "TableExists=false"
-          fi
+          aws dynamodb describe-table --table-name trakdip_terraform_locks \
+            && echo "TableExists=true" || echo "TableExists=false"
 
       - name: Create DynamoDB Table for Terraform State Locking
-        if: steps.check-dynamodb-table.outputs.TableExists == 'false'
+        if: steps.check-dynamodb-table.outputs.TableExists == false
         run: |
           aws dynamodb create-table \
             --table-name trakdip_terraform_locks \
