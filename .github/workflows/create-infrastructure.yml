@@ -1,0 +1,23 @@
+name: Create infrastructure
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+          type: choice
+          description: "Environment to create the terraform backend resources"
+          options: 
+          - dev
+          - staging
+          - prod
+
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  create-resources:
+    runs-on: ubuntu-latest
+    env:
+      location: east-us-1
+    
