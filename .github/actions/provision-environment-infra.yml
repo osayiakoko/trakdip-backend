@@ -1,0 +1,41 @@
+name: Provision Environment Infrastructure
+description: "This GitHub Action handles the provision of infrastructure for Trakdip api in selected"
+inputs:
+  environment:
+    type: choice
+    description: "Environment to create the Infrastructure"
+    options: 
+      - dev
+      - staging
+      - prod
+  upgradeTerraform:
+    description: 'Run terraform init -upgrade'
+    required: false
+    default: 'false'
+
+runs:
+  using: "composite"
+  working-directory: ./infrastructure/aws/
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.7.5
+
+    - name: Initialize Terraform
+      run: terraform init -backend-config="./variables/${{ inputs.environment }}.tfbackend"
+
+    - name: Validate Terraform configuration
+      run: terraform validate 
+
+    - name: Apply Terraform configuration
+      run: terraform apply -auto-approve
+
+    - name: Output details
+      run: |
+        echo "Task Definition ARN: $(terraform output task_definition_arn)"
+        echo "Load Balancer DNS Name: $(terraform output load_balancer_dns)"
+        echo "CloudFront Domain Name: $(terraform output cloudfront_domain_name)"
