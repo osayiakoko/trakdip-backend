@@ -1,4 +1,12 @@
 terraform {
+  backend "s3" {
+    bucket         = "trakdip-terraform-state-dev"
+    key            = "tfstate/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "trakdip_terraform_locks"
+    encrypt        = true
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"

@@ -1,0 +1,5 @@
+bucket         = "trakdip-terraform-state-staging"
+key            = "tfstate/terraform.tfstate"
+region         = "us-east-1"
+dynamodb_table = "trakdip_terraform_locks"
+encrypt        = true
